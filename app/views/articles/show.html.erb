@@ -1,0 +1,33 @@
+<h1><%=	@article.title %></h1>
+<h2>
+	<%= @article.subhead %>
+</h2>
+<div>
+	<%= @article.body %>
+</div>
+<br>
+<div>
+    Fecha de publicación: <%= @article.created_at%>
+</div>
+
+<h3>Comentarios</h3>
+<% @article.comments.each do |comment| %>
+  <p>
+    <strong><%= comment.username %>: </strong> <%= comment.body %> 
+  </p> 
+<% end %>
+
+<h3>Agregar comentario:</h3>
+<%= form_for([@article, @article.comments.build]) do |f| %>
+  <p>
+    <%= f.label "Nombre de usuario" %><br>
+    <%= f.text_field :username %>
+  </p>
+  <p>
+    <%= f.label "Comentario" %><br>
+    <%= f.text_area :body %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
